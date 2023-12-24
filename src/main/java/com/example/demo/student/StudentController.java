@@ -1,5 +1,7 @@
 package com.example.demo.student;
 
+import com.example.demo.student.dto.StudentPostDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +23,8 @@ public class StudentController {
 	}
 
 	@PostMapping
-	public void registerNewStudent(@RequestBody Student student) {
-		studentsService.addNewStudent(student);
+	public void registerNewStudent(@RequestBody @Valid StudentPostDto student) {
+		studentsService.addNewStudent(student.getStudent());
 	}
 
 	@DeleteMapping(path = "{studentId}")
