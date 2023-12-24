@@ -3,6 +3,7 @@ package com.example.demo.student;
 import com.example.demo.student.dto.StudentPostDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,20 +24,20 @@ public class StudentController {
 	}
 
 	@PostMapping
-	public void registerNewStudent(@RequestBody @Valid StudentPostDto student) {
-		studentsService.addNewStudent(student.getStudent());
+	public ResponseEntity<String> registerNewStudent(@RequestBody @Valid StudentPostDto student) {
+		return studentsService.addNewStudent(student.getStudent());
 	}
 
 	@DeleteMapping(path = "{studentId}")
-	public void deleteStudent(@PathVariable("studentId") Long studentId) {
-		studentsService.deleteStudent(studentId);
+	public ResponseEntity<String> deleteStudent(@PathVariable("studentId") Long studentId) {
+		return studentsService.deleteStudent(studentId);
 	}
 
 	@PutMapping(path = "{studentId}")
-	public void updateStudent(
+	public ResponseEntity<String> updateStudent(
 			@PathVariable("studentId") Long studentId,
 			@RequestBody Student student
 	) {
-		studentsService.updateStudent(studentId, student);
+		return studentsService.updateStudent(studentId, student);
 	}
 }
