@@ -1,4 +1,4 @@
-package com.example.demo.Config;
+package com.example.demo.common.config;
 
 import com.example.demo.auth.jwt.JwtTokenFilter;
 import org.springframework.context.annotation.Bean;
