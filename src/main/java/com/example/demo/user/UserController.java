@@ -29,7 +29,6 @@ public class UserController {
 
 	@DeleteMapping
 	public ResponseEntity<String> deleteUser(@AuthenticationPrincipal User userLocal) {
-		System.out.println(userLocal);
 		return userService.deleteUser(userLocal.getId());
 	}
 
