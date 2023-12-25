@@ -1,6 +1,6 @@
-package com.example.demo.student.dto;
+package com.example.demo.user.dto;
 
-import com.example.demo.student.Student;
+import com.example.demo.user.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public class StudentPostDto {
+public class UserPostDto {
 	@NotEmpty
 	@Size(min = 2, message = "name should have at least 2 characters")
 	private String name;
@@ -20,11 +20,11 @@ public class StudentPostDto {
 	@NotNull(message = "Date of birth should not be null")
 	private LocalDate dob;
 
-	public StudentPostDto() {
+	public UserPostDto() {
 		super();
 	}
 
-	public StudentPostDto(String name, String email, LocalDate dob) {
+	public UserPostDto(String name, String email, LocalDate dob) {
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
@@ -54,7 +54,7 @@ public class StudentPostDto {
 		this.dob = dob;
 	}
 
-	public Student getStudent() {
-		return new Student(this.name, this.email, this.dob);
+	public User getUser() {
+		return new User(this.name, this.email, this.dob);
 	}
 }

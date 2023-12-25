@@ -1,4 +1,4 @@
-package com.example.demo.student;
+package com.example.demo.user;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -10,11 +10,11 @@ import java.util.List;
 import static java.util.Calendar.MARCH;
 
 @Configuration
-public class StudentConfig {
+public class UserConfig {
 	@Bean
-	CommandLineRunner commandLineRunner(StudentRepository repository) {
+	CommandLineRunner commandLineRunner(UserRepository repository) {
 		return args -> {
-			Student admin = new Student(
+			User admin = new User(
 					"Admin",
 					"admin@gmail.com",
 					LocalDate.of(1992, MARCH, 25)

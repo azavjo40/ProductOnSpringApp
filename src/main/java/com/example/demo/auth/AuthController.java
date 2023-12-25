@@ -1,7 +1,7 @@
 package com.example.demo.auth;
 
 import com.example.demo.auth.jwt.JwtTokenService;
-import com.example.demo.student.Student;
+import com.example.demo.user.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +18,8 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody Student credentials) {
+	public ResponseEntity<?> login(@RequestBody User credentials) {
 		String token = jwtTokenService.generateToken(credentials.getEmail());
 		return ResponseEntity.ok(token);
-		//return new ResponseEntity<String>("Student deleted successfully", HttpStatus.OK);
 	}
 }

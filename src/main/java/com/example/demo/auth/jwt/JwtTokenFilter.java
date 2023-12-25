@@ -1,7 +1,7 @@
 package com.example.demo.auth.jwt;
 
-import com.example.demo.student.Student;
-import com.example.demo.student.StudentsService;
+import com.example.demo.user.User;
+import com.example.demo.user.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,18 +23,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 	private JwtTokenService jwtTokenService;
 
 	@Autowired
-	private StudentsService studentsService;
+	private UserService userService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 		String token = jwtTokenService.resolveToken(request);
 		if (token != null) {
-			String studentEmail = jwtTokenService.getSubjectFromToken(token);
+			String userEmail = jwtTokenService.getSubjectFromToken(token);
 			if (jwtTokenService.validateToken(token)) {
-				Student student = studentsService.getStudentByEmail(studentEmail);
-				if (student != null && student.getId() != null) {
-					authenticate(student);
+				User user = userService.getUserByEmail(userEmail);
+				if (user != null && user.getId() != null) {
+					authenticate(user);
 				}
 			}
 		}
@@ -42,8 +42,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		chain.doFilter(request, response);
 	}
 
-	private void authenticate(Student student) {
-		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(student, null, emptyList());
+	private void authenticate(User user) {
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, emptyList());
 		SecurityContextHolder.getContext().setAuthentication(auth);
 	}
 }
