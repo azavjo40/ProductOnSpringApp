@@ -20,14 +20,18 @@ public class UserPostDto {
 	@NotNull(message = "Date of birth should not be null")
 	private LocalDate dob;
 
+	@Size(min = 6, message = "Password should have at least 6 characters")
+	private String password;
+
 	public UserPostDto() {
 		super();
 	}
 
-	public UserPostDto(String name, String email, LocalDate dob) {
+	public UserPostDto(String name, String email, LocalDate dob, String password) {
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
+		this.password = password;
 	}
 
 	public String getName() {
@@ -54,7 +58,15 @@ public class UserPostDto {
 		this.dob = dob;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public User getUser() {
-		return new User(this.name, this.email, this.dob);
+		return new User(this.name, this.email, this.dob, this.password);
 	}
 }

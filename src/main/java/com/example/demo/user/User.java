@@ -26,21 +26,24 @@ public class User {
 	private LocalDate dob;
 	@Transient
 	private Integer age;
+	private String password;
 
 	public User() {
 	}
 
-	public User(Long id, String name, String email, LocalDate dob) {
+	public User(Long id, String name, String email, LocalDate dob, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
+		this.password = password;
 	}
 
-	public User(String name, String email, LocalDate dob) {
+	public User(String name, String email, LocalDate dob, String password) {
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -81,6 +84,14 @@ public class User {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override

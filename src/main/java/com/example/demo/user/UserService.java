@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,10 +14,12 @@ import java.util.Optional;
 @Service
 public class UserService {
 	private final UserRepository userRepository;
+	private final BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	public UserService(UserRepository userRepository) {
+	public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public User getUser(String email) {
@@ -28,6 +31,8 @@ public class UserService {
 		if (userOptional.isPresent()) {
 			throw new IllegalStateException("Email taken");
 		}
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 		userRepository.save(user);
 		return new ResponseEntity<String>("User created successfully", HttpStatus.OK);
 	}

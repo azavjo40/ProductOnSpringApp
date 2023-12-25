@@ -1,4 +1,4 @@
-package com.example.demo.auth.jwt;
+package com.example.demo.common.jwt;
 
 import com.example.demo.user.User;
 import com.example.demo.user.UserService;
@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -22,8 +23,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtTokenService jwtTokenService;
 
-	@Autowired
 	private UserService userService;
+
+	@Autowired
+	public JwtTokenFilter(@Lazy UserService userService) {
+		this.userService = userService;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

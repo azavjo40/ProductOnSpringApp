@@ -17,7 +17,8 @@ public class UserConfig {
 			User admin = new User(
 					"Admin",
 					"admin@gmail.com",
-					LocalDate.of(1992, MARCH, 25)
+					LocalDate.of(1992, MARCH, 25),
+					"Test123!!!"
 			);
 			repository.saveAll(
 					List.of(admin)
