@@ -4,6 +4,7 @@ import com.example.demo.student.dto.StudentPostDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public class StudentController {
 	}
 
 	@GetMapping
-	public List<Student> getStudents() {
+	public List<Student> getStudents(@AuthenticationPrincipal Student student) {
+		System.out.println(student);
 		return studentsService.getStudents();
 	}
 
@@ -40,6 +42,4 @@ public class StudentController {
 	) {
 		return studentsService.updateStudent(studentId, student);
 	}
-
-	
 }

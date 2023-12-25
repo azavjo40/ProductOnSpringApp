@@ -63,14 +63,7 @@ public class StudentsService {
 		return new ResponseEntity<String>("Student updated successfully", HttpStatus.OK);
 	}
 
-	public boolean checkIsUserByEmail(String email) {
-		System.out.println(email);
-		Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
-		if (studentOptional.isPresent()) {
-			return true;
-		} else {
-			return false;
-		}
-
+	public Student getStudentByEmail(String email) {
+		return email != null ? studentRepository.findStudentByEmail(email).orElse(null) : null;
 	}
 }

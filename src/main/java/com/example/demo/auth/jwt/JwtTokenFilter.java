@@ -1,5 +1,6 @@
 package com.example.demo.auth.jwt;
 
+import com.example.demo.student.Student;
 import com.example.demo.student.StudentsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,15 +29,21 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 		String token = jwtTokenService.resolveToken(request);
-		if (token != null && jwtTokenService.validateToken(token) && studentsService.checkIsUserByEmail(jwtTokenService.getSubjectFromToken(token))) {
-			authenticate();
+		if (token != null) {
+			String studentEmail = jwtTokenService.getSubjectFromToken(token);
+			if (jwtTokenService.validateToken(token)) {
+				Student student = studentsService.getStudentByEmail(studentEmail);
+				if (student != null && student.getId() != null) {
+					authenticate(student);
+				}
+			}
 		}
 
 		chain.doFilter(request, response);
 	}
 
-	private void authenticate() {
-		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken("user", null, emptyList());
+	private void authenticate(Student student) {
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(student, null, emptyList());
 		SecurityContextHolder.getContext().setAuthentication(auth);
 	}
 }
