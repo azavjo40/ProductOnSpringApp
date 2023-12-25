@@ -40,4 +40,6 @@ public class StudentController {
 	) {
 		return studentsService.updateStudent(studentId, student);
 	}
+
+	
 }
