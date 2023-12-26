@@ -1,5 +1,8 @@
 package com.example.demo.user;
 
+import com.example.demo.auth.dto.LoginDto;
+import com.example.demo.common.jwt.JwtTokenService;
+import com.example.demo.user.dto.UserResponseDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +18,13 @@ import java.util.Optional;
 public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
+	private final JwtTokenService jwtTokenService;
 
 	@Autowired
-	public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+	public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, JwtTokenService jwtTokenService) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.jwtTokenService = jwtTokenService;
 	}
 
 	public User getUser(String email) {
@@ -35,6 +40,22 @@ public class UserService {
 		user.setPassword(encodedPassword);
 		userRepository.save(user);
 		return new ResponseEntity<String>("User created successfully", HttpStatus.OK);
+	}
+
+	public ResponseEntity<UserResponseDto> login(LoginDto userLogin) {
+		User user = getUserByEmail(userLogin.getEmail());
+		if (user == null) {
+			return new ResponseEntity("User not found", HttpStatus.UNAUTHORIZED);
+		}
+
+		boolean matches = passwordEncoder.matches(userLogin.getPassword(), user.getPassword());
+		if (!matches) {
+			return new ResponseEntity("Invalid password", HttpStatus.UNAUTHORIZED);
+		}
+
+		String token = jwtTokenService.generateToken(userLogin.getEmail());
+
+		return new ResponseEntity<>(new UserResponseDto(token, user), HttpStatus.OK);
 	}
 
 	public ResponseEntity<String> deleteUser(Long userId) {

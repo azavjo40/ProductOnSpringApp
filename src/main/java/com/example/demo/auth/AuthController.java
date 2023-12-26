@@ -1,9 +1,10 @@
 package com.example.demo.auth;
 
+import com.example.demo.auth.dto.LoginDto;
 import com.example.demo.common.jwt.JwtTokenService;
-import com.example.demo.user.User;
 import com.example.demo.user.UserService;
 import com.example.demo.user.dto.UserPostDto;
+import com.example.demo.user.dto.UserResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +24,8 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody User credentials) {
-		String token = jwtTokenService.generateToken(credentials.getEmail());
-		return ResponseEntity.ok(token);
+	public ResponseEntity<UserResponseDto> login(@RequestBody @Valid LoginDto user) {
+		return userService.login(user);
 	}
 
 	@PostMapping("/register")
