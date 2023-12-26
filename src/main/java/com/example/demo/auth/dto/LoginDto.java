@@ -11,10 +11,6 @@ public class LoginDto {
 	@Size(min = 6, message = "Password should have at least 6 characters")
 	private String password;
 
-	public LoginDto() {
-		super();
-	}
-
 	public LoginDto(String email, String password) {
 		this.email = email;
 		this.password = password;

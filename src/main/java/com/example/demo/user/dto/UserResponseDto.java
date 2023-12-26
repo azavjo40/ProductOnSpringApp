@@ -1,30 +1,59 @@
 package com.example.demo.user.dto;
 
-import com.example.demo.user.User;
+import java.time.LocalDate;
 
 public class UserResponseDto {
-	String token;
-	User user;
+	private Long id;
+	private String name;
+	private String email;
+	private LocalDate dob;
+	private Integer age;
 
-	public UserResponseDto(String token, User user) {
-		user.setPassword("");
-		this.token = token;
-		this.user = user;
+	public UserResponseDto(Long id, String name, String email, LocalDate dob, Integer age) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.dob = dob;
+		this.age = age;
 	}
 
-	public String getToken() {
-		return token;
+	public Long getId() {
+		return id;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getDob() {
+		return dob;
+	}
+
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 }

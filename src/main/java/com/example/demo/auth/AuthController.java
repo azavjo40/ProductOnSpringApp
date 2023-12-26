@@ -4,7 +4,7 @@ import com.example.demo.auth.dto.LoginDto;
 import com.example.demo.common.jwt.JwtTokenService;
 import com.example.demo.user.UserService;
 import com.example.demo.user.dto.UserPostDto;
-import com.example.demo.user.dto.UserResponseDto;
+import com.example.demo.user.dto.UserResponseWithTokenDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +24,12 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<UserResponseDto> login(@RequestBody @Valid LoginDto user) {
+	public ResponseEntity<UserResponseWithTokenDto> login(@RequestBody @Valid LoginDto user) {
 		return userService.login(user);
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<String> register(@RequestBody @Valid UserPostDto user) {
+	public ResponseEntity<UserResponseWithTokenDto> register(@RequestBody @Valid UserPostDto user) {
 		System.out.println(user);
 		return userService.register(user.getUser());
 	}

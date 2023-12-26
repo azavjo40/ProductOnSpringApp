@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.user.dto.UserResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,7 +17,7 @@ public class UserController {
 	}
 
 	@GetMapping
-	public User getUser(@AuthenticationPrincipal User userLocal) {
+	public ResponseEntity<UserResponseDto> getUser(@AuthenticationPrincipal User userLocal) {
 		return userService.getUser(userLocal.getEmail());
 	}
 
