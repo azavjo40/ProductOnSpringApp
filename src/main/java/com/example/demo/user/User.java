@@ -1,9 +1,11 @@
 package com.example.demo.user;
 
+import com.example.demo.user.dto.UserResponseDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Entity
 @Table(name = "app_user")
@@ -27,15 +29,30 @@ public class User {
 	@Transient
 	private Integer age;
 	private String password;
+	@ElementCollection
+	private List<ERole> roles;
 
 	public User() {
 	}
 
-	public User(String name, String email, LocalDate dob, String password) {
+	public User(String name, String email, LocalDate dob, String password, List<ERole> roles) {
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
 		this.password = password;
+		this.roles = roles;
+	}
+
+	public UserResponseDto getUser() {
+		return new UserResponseDto(this.id, this.name, this.email, this.dob, this.getAge(), this.roles);
+	}
+
+	public List<ERole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<ERole> roles) {
+		this.roles = roles;
 	}
 
 	public Long getId() {

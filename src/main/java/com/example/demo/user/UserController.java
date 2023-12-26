@@ -33,4 +33,10 @@ public class UserController {
 	) {
 		return userService.updateUser(userLocal.getId(), user);
 	}
+
+	@GetMapping(path = "admin")
+	public ResponseEntity<String> getTest() {
+		System.out.println("Test Roles");
+		return ResponseEntity.ok("Test Roles");
+	}
 }

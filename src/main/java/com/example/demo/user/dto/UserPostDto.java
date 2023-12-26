@@ -1,5 +1,6 @@
 package com.example.demo.user.dto;
 
+import com.example.demo.user.ERole;
 import com.example.demo.user.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserPostDto {
 	@NotEmpty
@@ -22,6 +24,8 @@ public class UserPostDto {
 
 	@Size(min = 6, message = "Password should have at least 6 characters")
 	private String password;
+
+	private List<ERole> roles;
 
 	public UserPostDto() {
 		super();
@@ -50,6 +54,14 @@ public class UserPostDto {
 		this.email = email;
 	}
 
+	public List<ERole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<ERole> roles) {
+		this.roles = roles;
+	}
+
 	public LocalDate getDob() {
 		return dob;
 	}
@@ -67,6 +79,6 @@ public class UserPostDto {
 	}
 
 	public User getUser() {
-		return new User(this.name, this.email, this.dob, this.password);
+		return new User(this.name, this.email, this.dob, this.password, this.roles);
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,20 +31,22 @@ public class UserService {
 
 	public ResponseEntity<UserResponseDto> getUser(String email) {
 		User user = getUserByEmail(email);
-		return new ResponseEntity(new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge()), HttpStatus.OK);
+		return new ResponseEntity(user.getUser(), HttpStatus.OK);
 	}
 
-	public ResponseEntity<UserResponseWithTokenDto> register(User user) {
+	public ResponseEntity<UserResponseWithTokenDto> register(User user, Boolean isAdmin) {
 		Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
 		if (userOptional.isPresent()) {
 			throw new IllegalStateException("Email taken");
 		}
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+		user.setRoles(List.of(isAdmin ? ERole.ADMIN : ERole.USER));
 		User newUser = userRepository.save(user);
-		String token = jwtTokenService.generateToken(newUser.getEmail());
 
-		return new ResponseEntity(new UserResponseWithTokenDto(token, new UserResponseDto(newUser.getId(), newUser.getName(), newUser.getEmail(), newUser.getDob(), newUser.getAge())), HttpStatus.OK);
+		String token = jwtTokenService.generateToken(newUser.getEmail(), newUser.getRoles());
+
+		return new ResponseEntity(new UserResponseWithTokenDto(token, user.getUser()), HttpStatus.OK);
 	}
 
 	public ResponseEntity<UserResponseWithTokenDto> login(LoginDto userLogin) {
@@ -57,9 +60,9 @@ public class UserService {
 			return new ResponseEntity("Invalid password", HttpStatus.UNAUTHORIZED);
 		}
 
-		String token = jwtTokenService.generateToken(userLogin.getEmail());
+		String token = jwtTokenService.generateToken(userLogin.getEmail(), user.getRoles());
 
-		return new ResponseEntity<>(new UserResponseWithTokenDto(token, new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge())), HttpStatus.OK);
+		return new ResponseEntity<>(new UserResponseWithTokenDto(token, user.getUser()), HttpStatus.OK);
 	}
 
 	public ResponseEntity<String> deleteUser(Long userId) {

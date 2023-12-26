@@ -1,6 +1,7 @@
 package com.example.demo.common.config;
 
 import com.example.demo.common.jwt.JwtTokenFilter;
+import com.example.demo.user.ERole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +26,7 @@ public class SecurityConfig {
 				.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
 				.authorizeHttpRequests((auth) -> auth
 						.requestMatchers("/api/v1/auth/**").permitAll()
+						.requestMatchers("/api/v1/user/admin/**").hasRole(ERole.USER.toString())
 						.anyRequest().authenticated())
 				.csrf(csrf -> csrf.disable());
 		return http.build();

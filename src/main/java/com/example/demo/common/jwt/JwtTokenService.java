@@ -1,22 +1,25 @@
 package com.example.demo.common.jwt;
 
+import com.example.demo.user.ERole;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class JwtTokenService {
 	@Value("${myApp.jwtSecretKey}")
 	private String jwtSecretKey;
 
-	public String generateToken(String username) {
+	public String generateToken(String username, List<ERole> roles) {
 		return Jwts.builder()
 				.setSubject(username)
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 час
+				.claim("roles", roles)
 				.signWith(SignatureAlgorithm.HS512, jwtSecretKey)
 				.compact();
 	}
@@ -41,14 +44,13 @@ public class JwtTokenService {
 		return null;
 	}
 
-	public String getSubjectFromToken(String token) {
+	public Claims getBodyOfToken(String token) {
 		try {
 			Jws<Claims> claims = Jwts.parser()
 					.setSigningKey(jwtSecretKey)
 					.parseClaimsJws(token);
-			return claims.getBody().getSubject();
+			return claims.getBody();
 		} catch (Exception e) {
-			// Обработка ошибок, например, невалидный токен
 			return null;
 		}
 	}

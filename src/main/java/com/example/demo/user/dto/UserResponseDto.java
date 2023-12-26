@@ -1,6 +1,9 @@
 package com.example.demo.user.dto;
 
+import com.example.demo.user.ERole;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserResponseDto {
 	private Long id;
@@ -8,13 +11,23 @@ public class UserResponseDto {
 	private String email;
 	private LocalDate dob;
 	private Integer age;
+	private List<ERole> roles;
 
-	public UserResponseDto(Long id, String name, String email, LocalDate dob, Integer age) {
+	public UserResponseDto(Long id, String name, String email, LocalDate dob, Integer age, List<ERole> roles) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
 		this.age = age;
+		this.roles = roles;
+	}
+
+	public List<ERole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<ERole> roles) {
+		this.roles = roles;
 	}
 
 	public Long getId() {

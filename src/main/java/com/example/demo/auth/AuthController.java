@@ -31,6 +31,6 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<UserResponseWithTokenDto> register(@RequestBody @Valid UserPostDto user) {
 		System.out.println(user);
-		return userService.register(user.getUser());
+		return userService.register(user.getUser(), false);
 	}
 }
