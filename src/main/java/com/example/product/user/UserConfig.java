@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.product.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

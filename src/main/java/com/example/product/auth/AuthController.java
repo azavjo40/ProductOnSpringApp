@@ -1,10 +1,10 @@
-package com.example.demo.auth;
+package com.example.product.auth;
 
-import com.example.demo.auth.dto.LoginDto;
-import com.example.demo.common.jwt.JwtTokenService;
-import com.example.demo.user.UserService;
-import com.example.demo.user.dto.UserPostDto;
-import com.example.demo.user.dto.UserResponseWithTokenDto;
+import com.example.product.auth.dto.LoginDto;
+import com.example.product.common.jwt.JwtTokenService;
+import com.example.product.user.UserService;
+import com.example.product.user.dto.UserPostDto;
+import com.example.product.user.dto.UserResponseWithTokenDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

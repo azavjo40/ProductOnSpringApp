@@ -1,7 +1,7 @@
-package com.example.demo.common.jwt;
+package com.example.product.common.jwt;
 
-import com.example.demo.user.User;
-import com.example.demo.user.UserService;
+import com.example.product.user.User;
+import com.example.product.user.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -55,7 +55,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 	}
 
 	private void authenticate(User user, List<String> roles) {
-		
+
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		for (String role : roles) {
 			authorities.add(new SimpleGrantedAuthority(role));

@@ -1,6 +1,6 @@
-package com.example.demo.common.jwt;
+package com.example.product.common.jwt;
 
-import com.example.demo.user.ERole;
+import com.example.product.user.ERole;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,9 +1,9 @@
-package com.example.demo.user;
+package com.example.product.user;
 
-import com.example.demo.auth.dto.LoginDto;
-import com.example.demo.common.jwt.JwtTokenService;
-import com.example.demo.user.dto.UserResponseDto;
-import com.example.demo.user.dto.UserResponseWithTokenDto;
+import com.example.product.auth.dto.LoginDto;
+import com.example.product.common.jwt.JwtTokenService;
+import com.example.product.user.dto.UserResponseDto;
+import com.example.product.user.dto.UserResponseWithTokenDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

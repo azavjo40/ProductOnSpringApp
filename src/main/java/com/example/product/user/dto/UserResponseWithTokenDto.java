@@ -1,4 +1,4 @@
-package com.example.demo.user.dto;
+package com.example.product.user.dto;
 
 public class UserResponseWithTokenDto {
 	String token;

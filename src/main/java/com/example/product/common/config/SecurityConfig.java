@@ -1,7 +1,7 @@
-package com.example.demo.common.config;
+package com.example.product.common.config;
 
-import com.example.demo.common.jwt.JwtTokenFilter;
-import com.example.demo.user.ERole;
+import com.example.product.common.jwt.JwtTokenFilter;
+import com.example.product.user.ERole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

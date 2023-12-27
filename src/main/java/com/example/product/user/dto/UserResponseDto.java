@@ -1,6 +1,6 @@
-package com.example.demo.user.dto;
+package com.example.product.user.dto;
 
-import com.example.demo.user.ERole;
+import com.example.product.user.ERole;
 
 import java.time.LocalDate;
 import java.util.List;

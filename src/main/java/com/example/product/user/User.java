@@ -1,6 +1,6 @@
-package com.example.demo.user;
+package com.example.product.user;
 
-import com.example.demo.user.dto.UserResponseDto;
+import com.example.product.user.dto.UserResponseDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
