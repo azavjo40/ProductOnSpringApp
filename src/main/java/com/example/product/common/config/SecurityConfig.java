@@ -27,6 +27,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests((auth) -> auth
 						.requestMatchers("/api/v1/auth/**").permitAll()
 						.requestMatchers("/api/v1/product/all").permitAll()
+						.requestMatchers("/api/v1/product/one/**").permitAll()
 						.requestMatchers("/api/v1/user/admin/**").hasAuthority(ERole.ROLE_ADMIN.toString())
 						.requestMatchers("/api/v1/product/**").hasAuthority(ERole.ROLE_ADMIN.toString())
 						.anyRequest().authenticated())
