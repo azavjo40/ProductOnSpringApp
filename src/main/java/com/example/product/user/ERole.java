@@ -1,5 +1,5 @@
 package com.example.product.user;
 
 public enum ERole {
-	ADMIN, USER
+	ROLE_ADMIN, ROLE_USER
 }

@@ -41,7 +41,7 @@ public class UserService {
 		}
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-		user.setRoles(List.of(isAdmin ? ERole.ADMIN : ERole.USER));
+		user.setRoles(List.of(isAdmin ? ERole.ROLE_ADMIN : ERole.ROLE_USER));
 		User newUser = userRepository.save(user);
 
 		String token = jwtTokenService.generateToken(newUser.getEmail(), newUser.getRoles());

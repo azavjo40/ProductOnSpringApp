@@ -38,12 +38,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		String token = jwtTokenService.resolveToken(request);
 		if (token != null) {
-			Claims claims = jwtTokenService.getBodyOfToken(token);
-			String userEmail = claims.getSubject();
-			List<String> roles = claims.get("roles", List.class);
-			System.out.println(roles);
-
 			if (jwtTokenService.validateToken(token)) {
+				Claims claims = jwtTokenService.getBodyOfToken(token);
+				String userEmail = claims.getSubject();
+				List<String> roles = claims.get("roles", List.class);
 				User user = userService.getUserByEmail(userEmail);
 				if (user != null && user.getId() != null) {
 					authenticate(user, roles);
@@ -58,14 +56,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		for (String role : roles) {
+			System.out.println(role);
 			authorities.add(new SimpleGrantedAuthority(role));
 		}
 
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
 				user, null, authorities
 		);
-
-		// Устанавливаем authentication в SecurityContext
 		SecurityContextHolder.getContext().setAuthentication(auth);
 	}
 }

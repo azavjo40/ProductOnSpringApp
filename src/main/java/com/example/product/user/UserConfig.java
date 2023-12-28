@@ -28,7 +28,7 @@ public class UserConfig {
 					"admin@gmail.com",
 					LocalDate.of(1992, MARCH, 25),
 					passwordEncoder.encode("Test123!!!"),
-					List.of(ERole.ADMIN)
+					List.of(ERole.ROLE_ADMIN)
 			);
 			repository.saveAll(
 					List.of(admin)
