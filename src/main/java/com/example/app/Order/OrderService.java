@@ -48,10 +48,10 @@ public class OrderService {
 		return ResponseEntity.ok("You ordered");
 	}
 
-	public ResponseEntity<List<Order>> getUserOrders(User user) {
+	public ResponseEntity<String> getUserOrders(User user) {
 		List<Order> orders = getUserOrders(user.getId());
-		System.out.println("Order from DB: " + orders);
-		return ResponseEntity.ok(orders);
+		System.out.println("Order from DB: " + orders.toString());
+		return ResponseEntity.ok(orders.toString());
 	}
 
 	public List<Order> getUserOrders(Long userId) {
