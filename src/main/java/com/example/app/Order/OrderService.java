@@ -2,6 +2,7 @@ package com.example.app.Order;
 
 import com.example.app.Order.dto.OrderCreateDto;
 import com.example.app.Order.dto.OrderItemDto;
+import com.example.app.Order.dto.OrderResponseDto;
 import com.example.app.Order.repositories.OrderRepository;
 import com.example.app.product.Product;
 import com.example.app.product.ProductRepository;
@@ -50,8 +51,7 @@ public class OrderService {
 
 	public ResponseEntity<String> getUserOrders(User user) {
 		List<Order> orders = getUserOrders(user.getId());
-		System.out.println("Order from DB: " + orders.toString());
-		return ResponseEntity.ok(orders.toString());
+		return ResponseEntity.ok(new OrderResponseDto(orders).toString());
 	}
 
 	public List<Order> getUserOrders(Long userId) {
