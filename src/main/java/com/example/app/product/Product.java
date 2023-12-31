@@ -102,4 +102,18 @@ public class Product {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
+
+	@Override
+	public String toString() {
+		return "Product{" +
+				"id=" + id +
+				", title='" + title + '\'' +
+				", price=" + price +
+				", description='" + description + '\'' +
+				", category='" + category + '\'' +
+				", image='" + image + '\'' +
+				", count=" + count +
+				", rate=" + rate +
+				'}';
+	}
 }

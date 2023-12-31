@@ -3,6 +3,7 @@ package com.example.app.Order;
 import com.example.app.user.User;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class Order {
 	)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-	private List<OrderItem> orderItems;
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<OrderItem> orderItems = new ArrayList<>();
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderDate;
@@ -82,5 +83,16 @@ public class Order {
 
 	public void setTotalCost(Double totalCost) {
 		this.totalCost = totalCost;
+	}
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id=" + id +
+				", user=" + user +
+				", orderItems=" + orderItems +
+				", orderDate=" + orderDate +
+				", totalCost=" + totalCost +
+				'}';
 	}
 }

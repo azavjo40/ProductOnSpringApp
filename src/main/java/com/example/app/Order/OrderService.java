@@ -44,14 +44,13 @@ public class OrderService {
 		}
 
 		order.setOrderItems(orderItems);
-
 		orderRepository.save(order);
 		return ResponseEntity.ok("You ordered");
 	}
 
 	public ResponseEntity<List<Order>> getUserOrders(User user) {
-//		List<Order> orders = getUserOrders(user.getId());
-		List<Order> orders = orderRepository.findAll();
+		List<Order> orders = getUserOrders(user.getId());
+		System.out.println("Order from DB: " + orders);
 		return ResponseEntity.ok(orders);
 	}
 
