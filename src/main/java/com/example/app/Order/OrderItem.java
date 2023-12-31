@@ -4,6 +4,7 @@ import com.example.app.product.Product;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "app_order_item")
 public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
