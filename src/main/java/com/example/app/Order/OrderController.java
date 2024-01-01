@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v1/order")
 public class OrderController {
@@ -24,7 +26,7 @@ public class OrderController {
 	}
 
 	@GetMapping
-	public ResponseEntity<String> getUserOrders(@AuthenticationPrincipal User userLocal) {
+	public ResponseEntity<List<Order>> getUserOrders(@AuthenticationPrincipal User userLocal) {
 		return orderService.getUserOrders(userLocal);
 	}
 }

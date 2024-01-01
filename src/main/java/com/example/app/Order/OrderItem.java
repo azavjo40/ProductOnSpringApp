@@ -13,20 +13,15 @@ public class OrderItem {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_id")
-	private Order order;
-
 	private Integer quantity;
+	private Long order_id;
 
 	public OrderItem() {
 
 	}
 
-	public OrderItem(Product product, Order order, Integer quantity) {
+	public OrderItem(Product product, Integer quantity) {
 		this.product = product;
-		this.order = order;
 		this.quantity = quantity;
 	}
 
@@ -46,20 +41,20 @@ public class OrderItem {
 		this.product = product;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
 	public Integer getQuantity() {
 		return quantity;
 	}
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public Long getOrderId() {
+		return order_id;
+	}
+
+	public void setOrderId(Long order_id) {
+		this.order_id = order_id;
 	}
 
 	@Override

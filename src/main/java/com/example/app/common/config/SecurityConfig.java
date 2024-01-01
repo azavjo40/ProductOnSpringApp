@@ -2,8 +2,11 @@ package com.example.app.common.config;
 
 import com.example.app.common.jwt.JwtTokenFilter;
 import com.example.app.user.ERole;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,5 +41,12 @@ public class SecurityConfig {
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
+		ObjectMapper objectMapper = builder.build();
+		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		return objectMapper;
 	}
 }

@@ -31,7 +31,7 @@ public class UserService {
 
 	public ResponseEntity<UserResponseDto> getUser(String email) {
 		User user = getUserByEmail(email);
-		return new ResponseEntity(user.getUser(), HttpStatus.OK);
+		return new ResponseEntity(new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge(), user.getRoles()), HttpStatus.OK);
 	}
 
 	public ResponseEntity<UserResponseWithTokenDto> register(User user, Boolean isAdmin) {
@@ -46,7 +46,7 @@ public class UserService {
 
 		String token = jwtTokenService.generateToken(newUser.getEmail(), newUser.getRoles());
 
-		return new ResponseEntity(new UserResponseWithTokenDto(token, user.getUser()), HttpStatus.OK);
+		return new ResponseEntity(new UserResponseWithTokenDto(token, new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge(), user.getRoles())), HttpStatus.OK);
 	}
 
 	public ResponseEntity<UserResponseWithTokenDto> login(LoginDto userLogin) {
@@ -62,7 +62,7 @@ public class UserService {
 
 		String token = jwtTokenService.generateToken(userLogin.getEmail(), user.getRoles());
 
-		return new ResponseEntity<>(new UserResponseWithTokenDto(token, user.getUser()), HttpStatus.OK);
+		return new ResponseEntity<>(new UserResponseWithTokenDto(token, new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge(), user.getRoles())), HttpStatus.OK);
 	}
 
 	public ResponseEntity<String> deleteUser(Long userId) {

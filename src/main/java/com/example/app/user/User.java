@@ -1,6 +1,5 @@
 package com.example.app.user;
 
-import com.example.app.user.dto.UserResponseDto;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -41,10 +40,6 @@ public class User {
 		this.dob = dob;
 		this.password = password;
 		this.roles = roles;
-	}
-
-	public UserResponseDto getUser() {
-		return new UserResponseDto(this.id, this.name, this.email, this.dob, this.getAge(), this.roles);
 	}
 
 	public List<ERole> getRoles() {
