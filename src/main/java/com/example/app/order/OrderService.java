@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -33,42 +32,25 @@ public class OrderService {
 
 	@Transactional
 	public ResponseEntity<String> createOrder(OrderCreateDto orderDto, User user) {
-		Order order = buildOrder(orderDto);
-		order.setUser(user);
-		orderRepository.save(order);
-		saveOrderItems(orderDto, order);
-		return ResponseEntity.ok("Order created successfully");
-	}
-
-	private Order buildOrder(OrderCreateDto orderDto) {
 		Order order = new Order();
+		order.setUser(user);
 		order.setOrderDate(orderDto.getOrderDate());
 		order.setTotalCost(orderDto.getTotalCost());
-		return order;
-	}
 
-	private void saveOrderItems(OrderCreateDto orderDto, Order order) {
-		List<OrderItem> orderItems = orderDto.getOrderItems().stream()
-				.map(itemDto -> {
-					Product product = findProduct(itemDto.getProductId());
-					return buildOrderItem(order, product, itemDto);
-				})
-				.collect(Collectors.toList());
+		List<OrderItem> orderItems = new ArrayList<>();
+		for (OrderItemDto itemDto : orderDto.getOrderItems()) {
+			Product product = productRepository.findById(itemDto.getProductId())
+					.orElseThrow(() -> new RuntimeException("Product not found: " + itemDto.getProductId()));
+			OrderItem orderItem = new OrderItem();
+			orderItem.setProduct(product);
+			orderItem.setQuantity(itemDto.getQuantity());
+			orderItem.setOrder(order);
+			orderItems.add(orderItem);
+		}
 
-		orderItems.forEach(orderItemRepository::save);
-	}
-
-	private Product findProduct(Long productId) {
-		return productRepository.findById(productId)
-				.orElseThrow(() -> new RuntimeException("Product not found: " + productId));
-	}
-
-	private OrderItem buildOrderItem(Order order, Product product, OrderItemDto itemDto) {
-		OrderItem orderItem = new OrderItem();
-		orderItem.setOrderId(order.getId());
-		orderItem.setProduct(product);
-		orderItem.setQuantity(itemDto.getQuantity());
-		return orderItem;
+		order.setOrderItems(orderItems);
+		orderRepository.save(order);
+		return ResponseEntity.ok("You ordered");
 	}
 
 

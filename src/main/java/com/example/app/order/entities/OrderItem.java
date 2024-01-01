@@ -1,6 +1,7 @@
 package com.example.app.order.entities;
 
 import com.example.app.product.entities.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,15 +14,20 @@ public class OrderItem {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id")
+	@JsonIgnore
+	private Order order;
 	private Integer quantity;
-	private Long order_id;
 
 	public OrderItem() {
 
 	}
 
-	public OrderItem(Product product, Integer quantity) {
+	public OrderItem(Product product, Order order, Integer quantity) {
 		this.product = product;
+		this.order = order;
 		this.quantity = quantity;
 	}
 
@@ -41,6 +47,14 @@ public class OrderItem {
 		this.product = product;
 	}
 
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -49,19 +63,12 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public Long getOrderId() {
-		return order_id;
-	}
-
-	public void setOrderId(Long order_id) {
-		this.order_id = order_id;
-	}
-
 	@Override
 	public String toString() {
 		return "OrderItem{" +
 				"id=" + id +
 				", product=" + product +
+				", order=" + order +
 				", quantity=" + quantity +
 				'}';
 	}

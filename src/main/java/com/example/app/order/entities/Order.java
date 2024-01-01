@@ -3,7 +3,6 @@ package com.example.app.order.entities;
 import com.example.app.user.entities.User;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,9 +25,8 @@ public class Order {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id")
-	private List<OrderItem> orderItems = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+	private List<OrderItem> orderItems;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderDate;
