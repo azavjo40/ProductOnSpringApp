@@ -31,6 +31,8 @@ public class SecurityConfig {
 						.requestMatchers("/api/v1/auth/**").permitAll()
 						.requestMatchers("/api/v1/product/all").permitAll()
 						.requestMatchers("/api/v1/product/one/**").permitAll()
+						.requestMatchers("/v3/api-docs/**").permitAll() //swagger http://localhost:8080/v3/api-docs
+						.requestMatchers("/swagger-ui/**").permitAll() //swagger http://localhost:8080/swagger-ui/index.html
 						.requestMatchers("/api/v1/user/admin/**").hasAuthority(ERole.ROLE_ADMIN.toString())
 						.requestMatchers("/api/v1/product/**").hasAuthority(ERole.ROLE_ADMIN.toString())
 						.anyRequest().authenticated())
