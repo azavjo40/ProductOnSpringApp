@@ -22,6 +22,7 @@ public class UserConfig {
 
 	@Bean
 	CommandLineRunner commandLineRunner(UserRepository repository) {
+		List<User> usersBd = repository.findAll();
 		return args -> {
 			User admin = new User(
 					"Admin",
@@ -30,10 +31,12 @@ public class UserConfig {
 					passwordEncoder.encode("Test123!!!"),
 					List.of(ERole.ROLE_ADMIN)
 			);
-			repository.saveAll(
-					List.of(admin)
-			);
 
+			if (usersBd == null || usersBd.isEmpty()) {
+				repository.saveAll(
+						List.of(admin)
+				);
+			}
 		};
 	}
 
