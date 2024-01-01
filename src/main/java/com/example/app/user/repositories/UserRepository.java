@@ -1,5 +1,6 @@
-package com.example.app.user;
+package com.example.app.user.repositories;
 
+import com.example.app.user.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.RestController;

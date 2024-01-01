@@ -1,7 +1,8 @@
 package com.example.app.order;
 
 import com.example.app.order.dto.OrderCreateDto;
-import com.example.app.user.User;
+import com.example.app.order.entities.Order;
+import com.example.app.user.entities.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

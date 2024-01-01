@@ -1,7 +1,7 @@
 package com.example.app.common.config;
 
 import com.example.app.common.jwt.JwtTokenFilter;
-import com.example.app.user.ERole;
+import com.example.app.user.enums.ERole;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.context.annotation.Bean;

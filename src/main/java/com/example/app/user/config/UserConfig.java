@@ -1,5 +1,8 @@
-package com.example.app.user;
+package com.example.app.user.config;
 
+import com.example.app.user.entities.User;
+import com.example.app.user.enums.ERole;
+import com.example.app.user.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

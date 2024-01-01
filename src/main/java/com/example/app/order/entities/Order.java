@@ -1,6 +1,6 @@
-package com.example.app.order;
+package com.example.app.order.entities;
 
-import com.example.app.user.User;
+import com.example.app.user.entities.User;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

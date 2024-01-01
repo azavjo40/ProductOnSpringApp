@@ -2,11 +2,13 @@ package com.example.app.order;
 
 import com.example.app.order.dto.OrderCreateDto;
 import com.example.app.order.dto.OrderItemDto;
+import com.example.app.order.entities.Order;
+import com.example.app.order.entities.OrderItem;
 import com.example.app.order.repositories.OrderItemRepository;
 import com.example.app.order.repositories.OrderRepository;
-import com.example.app.product.Product;
-import com.example.app.product.ProductRepository;
-import com.example.app.user.User;
+import com.example.app.product.entities.Product;
+import com.example.app.product.repositories.ProductRepository;
+import com.example.app.user.entities.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

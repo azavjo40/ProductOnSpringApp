@@ -1,7 +1,7 @@
 package com.example.app.user.dto;
 
-import com.example.app.user.ERole;
-import com.example.app.user.User;
+import com.example.app.user.entities.User;
+import com.example.app.user.enums.ERole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

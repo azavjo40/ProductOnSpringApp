@@ -1,6 +1,6 @@
 package com.example.app.product.dto;
 
-import com.example.app.product.Product;
+import com.example.app.product.entities.Product;
 import jakarta.validation.constraints.*;
 
 public class ProductCreateDto {

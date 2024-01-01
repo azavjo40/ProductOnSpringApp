@@ -2,6 +2,7 @@ package com.example.app.product;
 
 import com.example.app.product.dto.ProductCreateDto;
 import com.example.app.product.dto.ProductUpdateDto;
+import com.example.app.product.entities.Product;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

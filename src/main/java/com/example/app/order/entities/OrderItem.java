@@ -1,6 +1,6 @@
-package com.example.app.order;
+package com.example.app.order.entities;
 
-import com.example.app.product.Product;
+import com.example.app.product.entities.Product;
 import jakarta.persistence.*;
 
 @Entity

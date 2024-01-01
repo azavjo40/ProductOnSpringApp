@@ -2,6 +2,8 @@ package com.example.app.product;
 
 import com.example.app.product.dto.ProductCreateDto;
 import com.example.app.product.dto.ProductUpdateDto;
+import com.example.app.product.entities.Product;
+import com.example.app.product.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

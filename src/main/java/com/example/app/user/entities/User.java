@@ -1,5 +1,6 @@
-package com.example.app.user;
+package com.example.app.user.entities;
 
+import com.example.app.user.enums.ERole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 

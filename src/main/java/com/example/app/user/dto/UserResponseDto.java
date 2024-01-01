@@ -1,6 +1,6 @@
 package com.example.app.user.dto;
 
-import com.example.app.user.ERole;
+import com.example.app.user.enums.ERole;
 
 import java.time.LocalDate;
 import java.util.List;

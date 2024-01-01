@@ -1,7 +1,7 @@
 package com.example.app.common.jwt;
 
-import com.example.app.user.User;
 import com.example.app.user.UserService;
+import com.example.app.user.entities.User;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
