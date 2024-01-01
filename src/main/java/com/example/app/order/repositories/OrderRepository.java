@@ -1,6 +1,6 @@
-package com.example.app.Order.repositories;
+package com.example.app.order.repositories;
 
-import com.example.app.Order.Order;
+import com.example.app.order.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,6 +1,6 @@
-package com.example.app.Order;
+package com.example.app.order;
 
-import com.example.app.Order.dto.OrderCreateDto;
+import com.example.app.order.dto.OrderCreateDto;
 import com.example.app.user.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

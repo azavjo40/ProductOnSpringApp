@@ -1,9 +1,9 @@
-package com.example.app.Order;
+package com.example.app.order;
 
-import com.example.app.Order.dto.OrderCreateDto;
-import com.example.app.Order.dto.OrderItemDto;
-import com.example.app.Order.repositories.OrderItemRepository;
-import com.example.app.Order.repositories.OrderRepository;
+import com.example.app.order.dto.OrderCreateDto;
+import com.example.app.order.dto.OrderItemDto;
+import com.example.app.order.repositories.OrderItemRepository;
+import com.example.app.order.repositories.OrderRepository;
 import com.example.app.product.Product;
 import com.example.app.product.ProductRepository;
 import com.example.app.user.User;

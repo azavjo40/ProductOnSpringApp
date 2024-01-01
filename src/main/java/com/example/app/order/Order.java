@@ -1,4 +1,4 @@
-package com.example.app.Order;
+package com.example.app.order;
 
 import com.example.app.user.User;
 import jakarta.persistence.*;
