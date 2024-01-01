@@ -1,5 +1,6 @@
 package com.example.app.product;
 
+import com.example.app.common.dto.ResponseDto;
 import com.example.app.product.dto.ProductCreateDto;
 import com.example.app.product.dto.ProductUpdateDto;
 import com.example.app.product.entities.Product;
@@ -23,12 +24,12 @@ public class ProductController {
 	}
 
 	@GetMapping(path = "all")
-	public ResponseEntity<List<Product>> getProducts() {
+	public ResponseEntity<ResponseDto<List<Product>>> getProducts() {
 		return productService.getProducts();
 	}
 
 	@GetMapping(path = "one/{id}")
-	public ResponseEntity<Product> getProduct(@PathVariable("id") Long id) {
+	public ResponseEntity<ResponseDto<Product>> getProduct(@PathVariable("id") Long id) {
 		return productService.getProduct(id);
 	}
 

@@ -1,5 +1,6 @@
 package com.example.app.product;
 
+import com.example.app.common.dto.ResponseDto;
 import com.example.app.product.dto.ProductCreateDto;
 import com.example.app.product.dto.ProductUpdateDto;
 import com.example.app.product.entities.Product;
@@ -19,15 +20,17 @@ public class ProductService {
 		this.productRepository = productRepository;
 	}
 
-	public ResponseEntity<List<Product>> getProducts() {
+	public ResponseEntity<ResponseDto<List<Product>>> getProducts() {
 		List<Product> products = productRepository.findAll();
-		return ResponseEntity.ok(products);
+		ResponseDto<List<Product>> productsResponse = new ResponseDto<>(products, "Success");
+		return ResponseEntity.ok(productsResponse);
 	}
 
-	public ResponseEntity<Product> getProduct(Long id) {
+	public ResponseEntity<ResponseDto<Product>> getProduct(Long id) {
 		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new IllegalStateException("Product not found"));
-		return ResponseEntity.ok(product);
+		ResponseDto<Product> productResponse = new ResponseDto<>(product, "Success");
+		return ResponseEntity.ok(productResponse);
 	}
 
 	public ResponseEntity<String> createProduct(ProductCreateDto product) {
