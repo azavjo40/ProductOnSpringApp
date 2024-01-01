@@ -1,5 +1,6 @@
 package com.example.app.order;
 
+import com.example.app.common.dto.ResponseDto;
 import com.example.app.order.dto.OrderCreateDto;
 import com.example.app.order.entities.Order;
 import com.example.app.user.entities.User;
@@ -27,7 +28,7 @@ public class OrderController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Order>> getUserOrders(@AuthenticationPrincipal User userLocal) {
+	public ResponseEntity<ResponseDto<List<Order>>> getUserOrders(@AuthenticationPrincipal User userLocal) {
 		return orderService.getUserOrders(userLocal);
 	}
 }

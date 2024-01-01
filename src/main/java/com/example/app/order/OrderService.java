@@ -1,5 +1,6 @@
 package com.example.app.order;
 
+import com.example.app.common.dto.ResponseDto;
 import com.example.app.order.dto.OrderCreateDto;
 import com.example.app.order.dto.OrderItemDto;
 import com.example.app.order.entities.Order;
@@ -54,9 +55,10 @@ public class OrderService {
 	}
 
 
-	public ResponseEntity<List<Order>> getUserOrders(User user) {
+	public ResponseEntity<ResponseDto<List<Order>>> getUserOrders(User user) {
 		List<Order> orders = getUserOrders(user.getId());
-		return ResponseEntity.ok(orderRepository.findAll());
+		ResponseDto<List<Order>> orderResponse = new ResponseDto<>(orders, "Success");
+		return ResponseEntity.ok(orderResponse);
 	}
 
 	public List<Order> getUserOrders(Long userId) {
