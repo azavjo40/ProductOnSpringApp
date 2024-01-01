@@ -1,10 +1,11 @@
 package com.example.app.auth;
 
 import com.example.app.auth.dto.LoginDto;
+import com.example.app.common.dto.ResponseDto;
 import com.example.app.common.jwt.JwtTokenService;
 import com.example.app.user.UserService;
+import com.example.app.user.dto.UserGetWithTokenDto;
 import com.example.app.user.dto.UserPostDto;
-import com.example.app.user.dto.UserResponseWithTokenDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,12 +25,12 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<UserResponseWithTokenDto> login(@RequestBody @Valid LoginDto user) {
+	public ResponseEntity<ResponseDto<UserGetWithTokenDto>> login(@RequestBody @Valid LoginDto user) {
 		return userService.login(user);
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<UserResponseWithTokenDto> register(@RequestBody @Valid UserPostDto user) {
+	public ResponseEntity<ResponseDto<UserGetWithTokenDto>> register(@RequestBody @Valid UserPostDto user) {
 		System.out.println(user);
 		return userService.register(user.getUser(), false);
 	}

@@ -1,9 +1,10 @@
 package com.example.app.user;
 
 import com.example.app.auth.dto.LoginDto;
+import com.example.app.common.dto.ResponseDto;
 import com.example.app.common.jwt.JwtTokenService;
-import com.example.app.user.dto.UserResponseDto;
-import com.example.app.user.dto.UserResponseWithTokenDto;
+import com.example.app.user.dto.UserGetDto;
+import com.example.app.user.dto.UserGetWithTokenDto;
 import com.example.app.user.entities.User;
 import com.example.app.user.enums.ERole;
 import com.example.app.user.repositories.UserRepository;
@@ -32,12 +33,13 @@ public class UserService {
 		this.jwtTokenService = jwtTokenService;
 	}
 
-	public ResponseEntity<UserResponseDto> getUser(String email) {
+	public ResponseEntity<ResponseDto<UserGetDto>> getUser(String email) {
 		User user = getUserByEmail(email);
-		return new ResponseEntity(new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge(), user.getRoles()), HttpStatus.OK);
+		ResponseDto<UserGetDto> userResponse = new ResponseDto<>(new UserGetDto(user), "Success");
+		return ResponseEntity.ok(userResponse);
 	}
 
-	public ResponseEntity<UserResponseWithTokenDto> register(User user, Boolean isAdmin) {
+	public ResponseEntity<ResponseDto<UserGetWithTokenDto>> register(User user, Boolean isAdmin) {
 		Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
 		if (userOptional.isPresent()) {
 			throw new IllegalStateException("Email taken");
@@ -49,10 +51,12 @@ public class UserService {
 
 		String token = jwtTokenService.generateToken(newUser.getEmail(), newUser.getRoles());
 
-		return new ResponseEntity(new UserResponseWithTokenDto(token, new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge(), user.getRoles())), HttpStatus.OK);
+		ResponseDto<UserGetWithTokenDto> userResponse = new ResponseDto<>(new UserGetWithTokenDto(token, user), "Success");
+
+		return ResponseEntity.ok(userResponse);
 	}
 
-	public ResponseEntity<UserResponseWithTokenDto> login(LoginDto userLogin) {
+	public ResponseEntity<ResponseDto<UserGetWithTokenDto>> login(LoginDto userLogin) {
 		User user = getUserByEmail(userLogin.getEmail());
 		if (user == null) {
 			return new ResponseEntity("User not found", HttpStatus.UNAUTHORIZED);
@@ -65,7 +69,8 @@ public class UserService {
 
 		String token = jwtTokenService.generateToken(userLogin.getEmail(), user.getRoles());
 
-		return new ResponseEntity<>(new UserResponseWithTokenDto(token, new UserResponseDto(user.getId(), user.getName(), user.getEmail(), user.getDob(), user.getAge(), user.getRoles())), HttpStatus.OK);
+		ResponseDto<UserGetWithTokenDto> userResponse = new ResponseDto<>(new UserGetWithTokenDto(token, user), "Success");
+		return ResponseEntity.ok(userResponse);
 	}
 
 	public ResponseEntity<String> deleteUser(Long userId) {
@@ -74,7 +79,7 @@ public class UserService {
 			throw new IllegalStateException("User with id " + userId + " does not exists");
 		}
 		userRepository.deleteById(userId);
-		return new ResponseEntity<String>("User deleted successfully", HttpStatus.OK);
+		return ResponseEntity.ok("User deleted successfully");
 	}
 
 	@Transactional
@@ -95,7 +100,7 @@ public class UserService {
 		if (dob != null && !Objects.equals(userRespos.getDob(), email)) {
 			userRespos.setDob(dob);
 		}
-		return new ResponseEntity<String>("User updated successfully", HttpStatus.OK);
+		return ResponseEntity.ok("User updated successfully");
 	}
 
 	public User getUserByEmail(String email) {
