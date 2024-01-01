@@ -1,5 +1,6 @@
 package com.example.app.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ public class User {
 	private LocalDate dob;
 	@Transient
 	private Integer age;
+	@JsonIgnore
 	private String password;
 	@ElementCollection
 	private List<ERole> roles;
