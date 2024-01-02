@@ -25,20 +25,20 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-				.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
-				.authorizeHttpRequests((auth) -> auth
-						.requestMatchers("/api/v1/auth/**").permitAll()
-						.requestMatchers("/api/v1/product/all").permitAll()
-						.requestMatchers("/api/v1/product/one/**").permitAll()
-						.requestMatchers("/v3/api-docs/**").permitAll() //swagger http://localhost:8080/v3/api-docs
-						.requestMatchers("/swagger-ui/**").permitAll() //swagger http://localhost:8080/swagger-ui/index.html
-						.requestMatchers("/api/v1/user/admin/**").hasAuthority(ERole.ROLE_ADMIN.toString())
-						.requestMatchers("/api/v1/product/**").hasAuthority(ERole.ROLE_ADMIN.toString())
-						.anyRequest().authenticated())
-				.csrf(csrf -> csrf.disable());
+		http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+		configureAuthorizeRequests(http);
+		http.csrf(csrf -> csrf.disable());
 		return http.build();
 	}
+
+	private void configureAuthorizeRequests(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests((auth) -> auth
+				.requestMatchers("/api/v1/auth/**", "/api/v1/product/all", "/api/v1/product/one/**",
+						"/v3/api-docs/**", "/swagger-ui/**").permitAll()
+				.requestMatchers("/api/v1/order/admin/**", "/api/v1/product/**").hasAuthority(ERole.ROLE_ADMIN.toString())
+				.anyRequest().authenticated());
+	}
+
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
