@@ -65,4 +65,9 @@ public class OrderService {
 		return userId != null ? orderRepository.findOrdersByUserId(userId) : new ArrayList<>();
 	}
 
+	public ResponseEntity<ResponseDto<List<Order>>> getOrders() {
+		List<Order> orders = orderRepository.findAll();
+		ResponseDto<List<Order>> orderResponse = new ResponseDto<>(orders, "Success");
+		return ResponseEntity.ok(orderResponse);
+	}
 }

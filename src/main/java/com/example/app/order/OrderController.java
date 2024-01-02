@@ -31,4 +31,9 @@ public class OrderController {
 	public ResponseEntity<ResponseDto<List<Order>>> getUserOrders(@AuthenticationPrincipal User userLocal) {
 		return orderService.getUserOrders(userLocal);
 	}
+
+	@GetMapping(path = "admin")
+	public ResponseEntity<ResponseDto<List<Order>>> getOrders() {
+		return orderService.getOrders();
+	}
 }
