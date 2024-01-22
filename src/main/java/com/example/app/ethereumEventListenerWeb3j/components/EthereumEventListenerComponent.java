@@ -1,4 +1,4 @@
-package com.example.app.ethereumEventListenerWeb3j.Components;
+package com.example.app.ethereumEventListenerWeb3j.components;
 
 import com.example.app.ethereumEventListenerWeb3j.EthereumEventListenerService;
 import jakarta.annotation.PostConstruct;
