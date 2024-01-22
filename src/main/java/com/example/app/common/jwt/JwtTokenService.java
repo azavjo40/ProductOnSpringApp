@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class JwtTokenService {
-	@Value("${myApp.jwtSecretKey}")
+	@Value("${app.jwtSecretKey}")
 	private String jwtSecretKey;
 
 	public String generateToken(String username, List<ERole> roles) {

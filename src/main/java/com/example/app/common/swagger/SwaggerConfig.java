@@ -22,3 +22,5 @@ public class SwaggerConfig {
 								.bearerFormat("JWT")));
 	}
 }
+
+//http://localhost:8080/swagger-ui/index.html#/
