@@ -37,6 +37,15 @@ public class OrderService {
 		order.setUser(user);
 		order.setOrderDate(orderDto.getOrderDate());
 		order.setTotalCost(orderDto.getTotalCost());
+		order.setPaymentMethod(orderDto.getPaymentMethod());
+
+		if (orderDto.getTransactionHash() != null && !orderDto.getTransactionHash().isEmpty()) {
+			order.setTransactionHash(orderDto.getTransactionHash());
+		}
+
+		if (orderDto.getPaymentTransactionId() != null && !orderDto.getPaymentTransactionId().isEmpty()) {
+			order.setPaymentTransactionId(orderDto.getPaymentTransactionId());
+		}
 
 		List<OrderItem> orderItems = new ArrayList<>();
 		for (OrderItemDto itemDto : orderDto.getOrderItems()) {

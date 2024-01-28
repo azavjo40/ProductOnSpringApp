@@ -34,7 +34,7 @@ public class SecurityConfig {
 	private void configureAuthorizeRequests(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((auth) -> auth
 				.requestMatchers("/api/v1/auth/**", "/api/v1/product/all", "/api/v1/product/one/**",
-						"/v3/api-docs/**", "/swagger-ui/**", "api/v1/tokens_purchased/**").permitAll()
+						"/v3/api-docs/**", "/swagger-ui/**", "/api/v1/event/tokens/purchased/**").permitAll()
 				.requestMatchers("/api/v1/order/admin/**", "/api/v1/product/**").hasAuthority(ERole.ROLE_ADMIN.toString())
 				.anyRequest().authenticated());
 	}

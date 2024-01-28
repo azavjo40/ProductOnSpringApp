@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/tokens_purchased")
+@RequestMapping(path = "api/v1/event")
 public class EthereumEventListenerController {
 	private final EthereumEventListenerService ethereumEventListenerService;
 
@@ -20,7 +20,7 @@ public class EthereumEventListenerController {
 		this.ethereumEventListenerService = ethereumEventListenerService;
 	}
 
-	@GetMapping
+	@GetMapping(path = "tokens/purchased")
 	public ResponseEntity<ResponseDto<List<TokensPurchased>>> getTokensPurchased() {
 		return ethereumEventListenerService.getTokensPurchased();
 	}

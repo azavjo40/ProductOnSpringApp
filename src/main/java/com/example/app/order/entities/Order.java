@@ -1,5 +1,6 @@
 package com.example.app.order.entities;
 
+import com.example.app.order.enums.PaymentMethod;
 import com.example.app.user.entities.User;
 import jakarta.persistence.*;
 
@@ -32,16 +33,23 @@ public class Order {
 	private Date orderDate;
 
 	private Double totalCost;
+	@Enumerated(EnumType.STRING)
+	private PaymentMethod paymentMethod;
+
+	private String transactionHash;
+	private String paymentTransactionId;
 
 	public Order() {
-
 	}
 
-	public Order(User user, List<OrderItem> orderItems, Date orderDate, Double totalCost) {
+	public Order(User user, List<OrderItem> orderItems, Date orderDate, Double totalCost, PaymentMethod paymentMethod, String transactionHash, String paymentTransactionId) {
 		this.user = user;
 		this.orderItems = orderItems;
 		this.orderDate = orderDate;
 		this.totalCost = totalCost;
+		this.paymentMethod = paymentMethod;
+		this.transactionHash = transactionHash;
+		this.paymentTransactionId = paymentTransactionId;
 	}
 
 	public Long getId() {
@@ -82,6 +90,30 @@ public class Order {
 
 	public void setTotalCost(Double totalCost) {
 		this.totalCost = totalCost;
+	}
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getTransactionHash() {
+		return transactionHash;
+	}
+
+	public void setTransactionHash(String transactionHash) {
+		this.transactionHash = transactionHash;
+	}
+
+	public String getPaymentTransactionId() {
+		return paymentTransactionId;
+	}
+
+	public void setPaymentTransactionId(String paymentTransactionId) {
+		this.paymentTransactionId = paymentTransactionId;
 	}
 
 	@Override
