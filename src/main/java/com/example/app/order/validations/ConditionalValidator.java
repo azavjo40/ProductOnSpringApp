@@ -27,6 +27,8 @@ public class ConditionalValidator implements ConstraintValidator<ConditionalVali
 			throw new IllegalArgumentException("Invalid object type");
 		}
 
+		OrderCreateDto orderDto = (OrderCreateDto) value;
+
 		try {
 			Field conditionalField = value.getClass().getDeclaredField(conditionalProperty);
 			conditionalField.setAccessible(true);
@@ -55,4 +57,30 @@ public class ConditionalValidator implements ConstraintValidator<ConditionalVali
 
 		return true;
 	}
+//	@Override
+//	public boolean isValid(Object value, ConstraintValidatorContext context) {
+//		if (!(value instanceof OrderCreateDto)) {
+//			throw new IllegalArgumentException("Invalid object type");
+//		}
+//
+//		OrderCreateDto order = (OrderCreateDto) value;
+//
+//		if (order.getPaymentMethod() == PaymentMethod.TOKEN && (order.getTransactionHash() == null || order.getTransactionHash().isEmpty())) {
+//			context.disableDefaultConstraintViolation();
+//			context.buildConstraintViolationWithTemplate("Transaction hash is required for token payment")
+//					.addPropertyNode("transactionHash")
+//					.addConstraintViolation();
+//			return false;
+//		}
+//
+//		if (order.getPaymentMethod() == PaymentMethod.CARD && (order.getPaymentTransactionId() == null || order.getPaymentTransactionId().isEmpty())) {
+//			context.disableDefaultConstraintViolation();
+//			context.buildConstraintViolationWithTemplate("Payment transaction ID is required for card payment")
+//					.addPropertyNode("paymentTransactionId")
+//					.addConstraintViolation();
+//			return false;
+//		}
+//
+//		return true;
+//	}
 }
