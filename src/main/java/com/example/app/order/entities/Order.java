@@ -1,6 +1,6 @@
 package com.example.app.order.entities;
 
-import com.example.app.order.enums.PaymentMethod;
+import com.example.app.common.enums.PaymentMethod;
 import com.example.app.user.entities.User;
 import jakarta.persistence.*;
 

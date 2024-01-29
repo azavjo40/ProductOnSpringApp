@@ -1,4 +1,4 @@
-package com.example.app.order.validations;
+package com.example.app.common.validations;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

@@ -1,8 +1,8 @@
 package com.example.app.order.dto;
 
-import com.example.app.order.enums.PaymentMethod;
-import com.example.app.order.validations.ConditionalValidation;
-import com.example.app.order.validations.ConditionalValidations;
+import com.example.app.common.enums.PaymentMethod;
+import com.example.app.common.validations.ConditionalValidation;
+import com.example.app.common.validations.ConditionalValidations;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
